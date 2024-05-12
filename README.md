@@ -17,7 +17,7 @@
   - From 16, where the exponent is 4 and '111', it was defined as InF, __∞__
 ---
 ### :open_file_folder: About Files:
-  - _FP_ files are drafts. It was an assignment for a computer architecture class, but I was disappointed that I couldn't implement it properly because it overlapped with the exam period:dizzy_face:, so I personally wrote the code again.
+  - _FP_ files are drafts. It was an assignment for a computer architecture class, but I was disappointed that I couldn't implement it properly because it overlapped with the exam period :dizzy_face: , so I personally wrote the code again.
   - The only two files you should be modifying are _converter.c_ ~~(if needed)~~ and _main.c_
   - _converter.c_ only has floating point conversion functions.
   - _main.c_ also includes the functions of ALU. However, it has not been implemented yet. _I don't know when it will be completed_:joy:
