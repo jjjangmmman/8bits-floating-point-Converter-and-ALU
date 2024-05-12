@@ -31,7 +31,7 @@ void FP8(float fnum, char* object, char* FP8_fnum) {
 			integer /= 2;
 		}
 		bi_integer[index] = '\0';
-		/* 정수 부분 역순으로 뒤집기 */
+		/* reverse arr bi_integer*/
 		int start = 0;
 		int end = index - 1;
 		while (start < end) {
@@ -98,7 +98,8 @@ void FP8(float fnum, char* object, char* FP8_fnum) {
 			strncpy(mantissa, p_one + 1, 5);
 			mantissa[5] = '\0';
 		}
-		/*가수부 반올림*/
+		/*rounding*/
+		//mantissa가 111111...인경우 올림처리하지않고 반올림을 수행하지않겠음
 		if (strcmp(mantissa, "11111") != 0 && mantissa[4] == '1') {
 			int carry = 1;
 			for (int i = 3; i >= 0; i--) {
@@ -128,6 +129,7 @@ void FP8(float fnum, char* object, char* FP8_fnum) {
 		strcpy(object, "InF");
 		strcpy(str_exponent, "111");
 		strcpy(mantissa, "0000");
+		//NaN은 연산이 수행된 이후에 구분할 수 있으므로 단순히 FP8에서는 구현하지않겠음
 	}
 
 	sprintf(FP8_fnum, "%c%s%s", sign, str_exponent, mantissa);
@@ -136,17 +138,20 @@ void FP8(float fnum, char* object, char* FP8_fnum) {
 
 /*메인 함수*/
 int main(void) {
-	float fnum;
+	char op;
+	float fnum1, fnum2;
+	int scan_items;
 	char object[4];
 	char FP8_fnum[9];
 
-	/*read float number*/
-	printf("Enter the number you want to express in FP8 : ");
-	scanf("%f", &fnum);
+	/*read operator  and 2 float numbers*/
+	printf("read operator '+' or '-' and 2 float numbers :");
+	scan_items = scanf("%c %f %f", &op, &fnum1, &fnum2);
+	if (check_right_scan(scan_items, op) == 1) return 1;
 
 	/*translate floating number to FP8*/
-	FP8(fnum, &object, &FP8_fnum);
-	printf("NUM TYPE : %s, translate_FP8 : %s", object, FP8_fnum);
+	FP8(fnum1, &object, &FP8_fnum);
+	printf("유형 : %s, 2진수 표현 : %s", object, FP8_fnum);
 
 	return 0;
 }
